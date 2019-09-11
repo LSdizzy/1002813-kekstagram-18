@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артур Сафин](https://up.htmlacademy.ru/javascript/18/user/1002813).
-* Наставник: `Неизвестно`.
+* Наставник: `Иван Чернобук`.
 
 ---
 
