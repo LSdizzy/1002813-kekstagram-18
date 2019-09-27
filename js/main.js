@@ -18,8 +18,8 @@ var commentsArray = [
 function generatePictures() {
   for (var i = 0; i < PICTURES_NUM; i++) {
     var url = 'photos/' + (i + 1) + '.jpg';
-    var likes = randLikesGen();
-    var comments = randCommentsGen();
+    var likes = getRandom(MIN_LIKES, MAX_LIKES);
+    var comments = generateComments();
 
     pictures.push({url: url, likes: likes, comments: comments});
   }
@@ -31,15 +31,20 @@ function findRandomValue(num) {
   return Math.floor(Math.random() * num);
 }
 
-function randLikesGen() {
-  var likes = 0;
-  while (likes < MIN_LIKES || likes > MAX_LIKES) {
-    likes = Math.floor(Math.random() * MAX_LIKES);
-  }
-  return (likes);
-}
+// function generateLikes() {
+//   var likes = 0;
+//   while (likes < MIN_LIKES || likes > MAX_LIKES) {
+//     likes = Math.floor(Math.random() * MAX_LIKES);
+//   }
+//   return (likes);
+// }
 
-function randCommentsGen() {
+var getRandom = function randomInteger(min, max) {
+  var rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
+
+function generateComments() {
   var comments = [];
   var commentsNum = findRandomValue(20) + COMMENTS_MINIMUM_NUM;
   for (var i = 0; i < commentsNum; i++) {
