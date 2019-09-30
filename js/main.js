@@ -1,7 +1,7 @@
 'use strict';
-var similarListElement = document.getElementById('#picture');
+var listPicture = document.querySelector('.pictures');
 
-var similarPictureTemplate = document.getElementById('#picture').content.querySelector('.picture');
+var pictureTemplate = document.querySelector('#picture').content;
 
 
 var MIN_LIKES = 15;
@@ -52,24 +52,24 @@ function generatePictures() {
   return pictures;
 }
 
-var picturesMocks = generatePictures(picturesMocks);
+var picturesMocks = generatePictures();
 
 function createPicture(picture) {
-  var pictureElement = similarPictureTemplate.cloneNode(true);
+  var pictureElement = pictureTemplate.cloneNode(true);
 
-  pictureElement.querySelector('.picture__img').url = picture.url;
+  pictureElement.src = picture.url;
   pictureElement.querySelector('.picture__likes').textContent = picture.likes;
   pictureElement.querySelector('.picture__comments').textContent = picture.comments;
 
   return pictureElement;
 }
 
-function renderPictures(arr) {
-  var fragment = renderPictures(picturesMocks);
-  for (var i = 0; i < arr.length; i++) {
-    fragment.appendChild(createPicture(arr[i]));
+function renderPictures(mocks) {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < mocks.length; i++) {
+    fragment.appendChild(createPicture(mocks[i]));
   }
-  similarListElement.appendChild(fragment);
+  listPicture.appendChild(fragment);
 }
 
-renderPictures();
+renderPictures(picturesMocks);
