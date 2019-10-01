@@ -29,13 +29,11 @@ function randomInteger(min, max) {
 function generateComments() {
   var comments = [];
   var commentsNum = findRandomValue(5) + COMMENTS_MINIMUM_NUM;
+
   for (var i = 0; i < commentsNum; i++) {
     comments.push(commentsArray[Math.floor(findRandomValue(6))]);
-    // if (findRandomValue(MAX_LIKES) % 2 !== 0) {
-    //   comments[i] = comments[i] + ' ' + commentsArray[Math.floor(findRandomValue(10))];
-    // }
-    // debugger
   }
+
   return comments;
 }
 
