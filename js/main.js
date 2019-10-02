@@ -72,3 +72,17 @@ function renderPictures(mocks) {
 }
 
 renderPictures(picturesMocks);
+
+// задание 8
+
+var formRegistrationOpen = document.querySelector('#upload-file');
+var formRegistrationClose = document.querySelector('#upload-cancel');
+var formRedaktorFoto = document.querySelector('.img-upload__overlay');
+
+formRegistrationOpen.addEventListener('click', function() {
+  formRedaktorFoto.classList.remove('hidden');
+});
+
+formRegistrationClose.addEventListener('click', function() {
+  formRedaktorFoto.classList.add('hidden');
+});
