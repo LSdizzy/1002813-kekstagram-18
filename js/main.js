@@ -75,47 +75,52 @@ renderPictures(picturesMocks);
 
 // задание 8
 
-var formRegistrationOpen = document.querySelector('#upload-file');
-var formRegistrationClose = document.querySelector('#upload-cancel');
-var formRedaktorFoto = document.querySelector('.img-upload__overlay');
+var uploadFileInput = document.querySelector('.img-upload__input');//поле загрузки фильтров
+var closeFotoPreview = document.querySelector('.img-upload__cancel');//зачек крестика
+var uploadFotoOverlay = document.querySelector('.img-upload__overlay');//форма редактирования
+var uploadFotoPreview = document.querySelector('.img-upload__preview');//пред просмотр
 
 var hashtagsInput = document.querySelector('.text__hashtags');//поле ввода хештегов
 var commentInput = document.querySelector('.text__description');//поле ввода коментариев
 var submitFormBtn = document.querySelector('.img-upload__submit');//кнопка отправки формы
 
-formRegistrationOpen.addEventListener('click', function () {
-  openForm();
+uploadFileInput.addEventListener('change', function () {
+  openPreview();
 });
 
-formRegistrationClose.addEventListener('click', function () {
-  closeForm();
+closeFotoPreview.addEventListener('click', function () {
+  closePreview();
 });
 
-formRegistrationClose.addEventListener('keydown', function (evt) {
+closeFotoPreview.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 13) {
-    closeForm();
+    closePreview();
   }
 });
 
 var onPreviewEscPress = function (evt) {
   if (evt.keyCode === 27 && hashtagsInput !== document.activeElement && commentInput !== document.activeElement) {
-    closeForm();
+    closePreview();
   }
 }; // нажатие на esc не реагирует когда поля ввода активны
 
-var openForm = function () {
-  formRedaktorFoto.classList.remove('hidden');
+var openPreview = function () {
+  uploadFotoOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onPreviewEscPress);
 };
 
-var closeForm = function () {
-  formRedaktorFoto.classList.add('hidden');
+var closePreview = function () {
+  uploadFotoOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onPreviewEscPress);
 };
 
 
 hashtagsInput.addEventListener('input', function () {
   validateHahtags(hashtagsInput);
+});
+
+commentInput.addEventListener('input', function () {
+  validateComment(commentInput);
 });
 
 
@@ -132,17 +137,26 @@ function validateHahtags(input) {
       input.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
     } else if (currentElement.length <= 1) {
       input.setCustomValidity('хештег не должен состоять только из символа #');
+    } else if (currentElement.length > 20) {
+      input.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
     } else if (hashtagsArray.length > 5) {
       input.setCustomValidity('нельзя указать больше пяти хэш-тегов');
     } else {
-      input.setCustomValidity('Ошибка!');
+      input.setCustomValidity('');
     }
   }
 }
 
+function validateComment(input) {
+  if (input.value.length > 140) {
+    input.setCustomValidity('длина комментария не может составлять больше 140 символов');
+  } else {
+      input.setCustomValidity('');
+    }
+}
 
 function findSameHashtags(array, item) {
-  debugger
+  // debugger;
   var hashtags = [];
   var wordiIdx = array.indexOf(item);
   while (wordiIdx !== -1) {
@@ -154,3 +168,26 @@ function findSameHashtags(array, item) {
   }
   return false;
 }
+
+var minArrow = document.querySelector('.scale__control--smaller');//стрелка мин
+var maxArrow = document.querySelector('.scale__control--bigger ');//стрелка макс
+var fieldValue = document.querySelector('.scale__control--value');//значение поля
+var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
+
+//функция наложения эфектов на фото
+var changeFotoFilter = function (currentFilter) {
+  // debugger;
+  if (currentFilter !== 'none') {
+    uploadFotoPreview.setAttribute('class', 'img-upload__preview');
+    uploadFotoPreview.classList.add('effects__preview--' + currentFilter);
+  } else {
+    uploadFotoPreview.setAttribute('class', 'img-upload__preview');
+  }
+};
+
+//работа с фильтром
+uploadEffectsList.addEventListener('change', function (evt) {
+  // debugger;
+  var targetValue = evt.target.value;
+  changeFotoFilter(targetValue);
+});
