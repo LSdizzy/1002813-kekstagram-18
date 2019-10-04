@@ -74,15 +74,19 @@ function renderPictures(mocks) {
 renderPictures(picturesMocks);
 
 // задание 8
+var uploadImages = document.querySelector('.img-upload');
+var uploadFileInput = uploadImages.querySelector('.img-upload__input');//поле загрузки фильтров
+var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//зачек крестика
+var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');//форма редактирования
+var uploadFotoPreview = uploadImages.querySelector('.img-upload__preview');//пред просмотр
+var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
 
-var uploadFileInput = document.querySelector('.img-upload__input');//поле загрузки фильтров
-var closeFotoPreview = document.querySelector('.img-upload__cancel');//зачек крестика
-var uploadFotoOverlay = document.querySelector('.img-upload__overlay');//форма редактирования
-var uploadFotoPreview = document.querySelector('.img-upload__preview');//пред просмотр
+var hashtagsInput = uploadImages.querySelector('.text__hashtags');//поле ввода хештегов
+var commentInput = uploadImages.querySelector('.text__description');//поле ввода коментариев
+var submitFormBtn = uploadImages.querySelector('.img-upload__submit');//кнопка отправки формы
 
-var hashtagsInput = document.querySelector('.text__hashtags');//поле ввода хештегов
-var commentInput = document.querySelector('.text__description');//поле ввода коментариев
-var submitFormBtn = document.querySelector('.img-upload__submit');//кнопка отправки формы
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 uploadFileInput.addEventListener('change', function () {
   openPreview();
@@ -93,24 +97,27 @@ closeFotoPreview.addEventListener('click', function () {
 });
 
 closeFotoPreview.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
+  if (evt.keyCode === ENTER_KEYCODE) {
     closePreview();
   }
 });
 
 var onPreviewEscPress = function (evt) {
-  if (evt.keyCode === 27 && hashtagsInput !== document.activeElement && commentInput !== document.activeElement) {
+  if (evt.keyCode === ESC_KEYCODE && hashtagsInput !== evt.target && commentInput !== evt.target) {
     closePreview();
   }
 }; // нажатие на esc не реагирует когда поля ввода активны
 
 var openPreview = function () {
   uploadFotoOverlay.classList.remove('hidden');
-  document.addEventListener('keydown', onPreviewEscPress);
+  uploadImages.querySelector('#effect-none').checked = true;//значение по умолчанию
+  fotoFiltersSlider.classList.add('hidden');//без слайдера на оригинале
+  document.addEventListener('keydown', onPreviewEscPress);//закрытие окна на esc
 };
 
 var closePreview = function () {
   uploadFotoOverlay.classList.add('hidden');
+  // uploadFileInput.value = '';// надо ли??
   document.removeEventListener('keydown', onPreviewEscPress);
 };
 
@@ -151,8 +158,8 @@ function validateComment(input) {
   if (input.value.length > 140) {
     input.setCustomValidity('длина комментария не может составлять больше 140 символов');
   } else {
-      input.setCustomValidity('');
-    }
+    input.setCustomValidity('');
+  }
 }
 
 function findSameHashtags(array, item) {
@@ -169,25 +176,41 @@ function findSameHashtags(array, item) {
   return false;
 }
 
-var minArrow = document.querySelector('.scale__control--smaller');//стрелка мин
-var maxArrow = document.querySelector('.scale__control--bigger ');//стрелка макс
-var fieldValue = document.querySelector('.scale__control--value');//значение поля
+// var minArrow = uploadImages.querySelector('.scale__control--smaller');//стрелка мин
+// var maxArrow = uploadImages.querySelector('.scale__control--bigger ');//стрелка макс
+// var fieldValue = uploadImages.querySelector('.scale__control--value');//значение поля
+
 var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 
 //функция наложения эфектов на фото
 var changeFotoFilter = function (currentFilter) {
-  // debugger;
+  dropFilter();
   if (currentFilter !== 'none') {
+    fotoFiltersSlider.classList.remove('hidden');
     uploadFotoPreview.setAttribute('class', 'img-upload__preview');
     uploadFotoPreview.classList.add('effects__preview--' + currentFilter);
   } else {
     uploadFotoPreview.setAttribute('class', 'img-upload__preview');
+    fotoFiltersSlider.classList.add('hidden');
   }
 };
 
 //работа с фильтром
 uploadEffectsList.addEventListener('change', function (evt) {
-  // debugger;
   var targetValue = evt.target.value;
   changeFotoFilter(targetValue);
 });
+
+var pin = uploadImages.querySelector('.effect-level__pin');//кнопка изменения глубыины эффекта
+var pinValue = uploadImages.querySelector('effect-level__value');//значение кнопки наложеного эффекта
+var pinDepth = uploadImages.querySelector('.effect-level__depth');//полоса насыщености эфекта (линия насыщености)
+var MIN_CLIENT_X = 0;// мин координата пина относительно левого края
+var MAX_CLIENT_X = 445;// макс координата пина относительно правого края
+var MAX_DEPTH_VAL = 100;// макс значение глубины цвета
+
+// Функция сброса значение фильтров
+function dropFilter() {
+  uploadFotoPreview.stile.filter = '';//сброс значения
+  pin.style.left = MIN_CLIENT_X + 'px';//значение пина по усолчанию
+  pinDepth.style.width = MAX_DEPTH_VAL + '%';//значение насфщености по умолчанию
+};
