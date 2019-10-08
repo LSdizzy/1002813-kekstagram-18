@@ -182,9 +182,17 @@ function findSameHashtags(array, item) {
 
 var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 
+// Функция сброса значение фильтров
+function dropFilter() {
+  uploadFotoPreview.style.filter = '';//сброс значения
+  pin.style.left = MIN_CLIENT_X + 'px';//значение пина по усолчанию
+  pinDepth.style.width = MAX_DEPTH_VAL + '%';//значение насфщености по умолчанию
+};
+
 //функция наложения эфектов на фото
 var changeFotoFilter = function (currentFilter) {
   dropFilter();
+
   if (currentFilter !== 'none') {
     fotoFiltersSlider.classList.remove('hidden');
     uploadFotoPreview.setAttribute('class', 'img-upload__preview');
@@ -208,9 +216,4 @@ var MIN_CLIENT_X = 0;// мин координата пина относител�
 var MAX_CLIENT_X = 445;// макс координата пина относительно правого края
 var MAX_DEPTH_VAL = 100;// макс значение глубины цвета
 
-// Функция сброса значение фильтров
-function dropFilter() {
-  uploadFotoPreview.stile.filter = '';//сброс значения
-  pin.style.left = MIN_CLIENT_X + 'px';//значение пина по усолчанию
-  pinDepth.style.width = MAX_DEPTH_VAL + '%';//значение насфщености по умолчанию
-};
+
