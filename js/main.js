@@ -108,7 +108,7 @@ pin.addEventListener('mouseup', function(evt) {
 
   if (deviation >= MIN_CLIENT_X && deviation <= MAX_CLIENT_X) {
     pin.style.left = deviation + 'px';
-    // pinValue.setAttribute('value', percent);
+    pinValue.setAttribute('value', percent);
     pinDepth.style.width = percent + '%';//Принимает процентное соотношение
     filtration(percent);
   }
