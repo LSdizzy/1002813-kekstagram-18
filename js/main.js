@@ -42,7 +42,8 @@ var commentsLoader = document.querySelector('.comments-loader');
 var uploadImages = document.querySelector('.img-upload');
 var uploadFileInput = uploadImages.querySelector('.img-upload__input');//поле загрузки фильтров
 var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//зачек крестика
-var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');//форма редактирования
+var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');
+uploadFotoOverlay.classList.add('hidden');//форма редактирования
 var uploadFotoPreview = uploadImages.querySelector('.img-upload__preview');//пред просмотр
 var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
@@ -88,9 +89,29 @@ closeBigPicture.addEventListener('keydown', function(evt) {
   }
 });
 
-pin.addEventListener('mouseup', function(evt){
-  debugger;
-  filtration();
+pin.addEventListener('mouseup', function(evt) {
+  // debugger;
+  evt.preventDefault();
+  var deviation;
+  var percent;
+
+  var startCoords = {
+    x: evt.clientX
+  };
+
+  var shift = {
+    x: startCoords.x - evt.clientX
+  };
+
+  deviation = pin.offsetLeft - shift.x;
+  percent = Math.ceil((deviation * 100) / MAX_CLIENT_X);//Расчет % текущего подложения пина относительно шкалы
+
+  if (deviation >= MIN_CLIENT_X && deviation <= MAX_CLIENT_X) {
+    pin.style.left = deviation + 'px';
+    // pinValue.setAttribute('value', percent);
+    pinDepth.style.width = percent + '%';//Принимает процентное соотношение
+    filtration(percent);
+  }
 });
 
 var onPreviewEscPress = function (evt) {
