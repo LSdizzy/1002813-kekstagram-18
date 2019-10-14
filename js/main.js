@@ -43,7 +43,7 @@ var uploadImages = document.querySelector('.img-upload');
 var uploadFileInput = uploadImages.querySelector('.img-upload__input');//поле загрузки фильтров
 var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//зачек крестика
 var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');
-uploadFotoOverlay.classList.add('hidden');//форма редактирования
+uploadFotoOverlay.classList.add('.hidden');//форма редактирования
 var uploadFotoPreview = uploadImages.querySelector('.img-upload__preview');//пред просмотр
 var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
@@ -90,7 +90,6 @@ closeBigPicture.addEventListener('keydown', function(evt) {
 });
 
 pin.addEventListener('mouseup', function(evt) {
-  // debugger;
   evt.preventDefault();
   var deviation;
   var percent;
@@ -108,7 +107,7 @@ pin.addEventListener('mouseup', function(evt) {
 
   if (deviation >= MIN_CLIENT_X && deviation <= MAX_CLIENT_X) {
     pin.style.left = deviation + 'px';
-    pinValue.setAttribute('value', percent);
+    // pinValue.setAttribute('value', percent);
     pinDepth.style.width = percent + '%';//Принимает процентное соотношение
     filtration(percent);
   }
@@ -134,7 +133,7 @@ var closePreview = function() {
 };
 
 var openPopup = function() {
-  uploadFotoOverlay.classList.remove('hidden');
+  // uploadFotoOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onPreviewEscPress);
 }
 
@@ -152,18 +151,18 @@ var changeFotoFilter = function (currentFilter) {
   debugger;
   if (currentFilter !== 'none') {
     fotoFiltersSlider.classList.remove('hidden');
-    // uploadFotoPreview.setAttribute('class', 'img-upload__preview');
+    uploadFotoPreview.setAttribute('class', 'img-upload__preview');
     uploadFotoPreview.classList.add('effects__preview--' + currentFilter);
   } else if (currentFilter !== 'none') {
-    uploadFotoPreview.style.filter = 'grayscale(1)';
+    uploadFotoPreview.style.filter='grayscale(1)';
   } else if (currentFilter !== 'none') {
-    uploadFotoPreview.style.filter = 'sepia(1)';
+    uploadFotoPreview.style.filter='sepia(1)';
   } else if (currentFilter !== 'none') {
-    uuploadFotoPreview.style.filter = 'invert(100%)';
+    uuploadFotoPreview.style.filter='invert(100%)';
   } else if (currentFilter !== 'none') {
-    uploadFotoPreview.style.filter = 'blur(3px)';
+    uploadFotoPreview.style.filter='blur(3px)';
   } else if (currentFilter !== 'none') {
-    uploadFotoPreview.style.filter = 'brightness(3)';
+    uploadFotoPreview.style.filter='brightness(3)';
   } else {
     uploadFotoPreview.setAttribute('class', 'img-upload__preview');
     fotoFiltersSlider.classList.add('hidden');
@@ -244,7 +243,6 @@ generatePictures(fotos);
 
 function createPicture(picture) {
   var pictureElement = pictureTemplate.cloneNode(true);
-  // debugger;
   pictureElement.querySelector('.picture__img').setAttribute('src', picture.user);
   pictureElement.querySelector('.picture__likes').textContent = picture.likes;
   pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
@@ -265,7 +263,6 @@ function renderPictures(arr) {
 
 //Функция создания DOM-элемента комментарий к bigFoto с помощью разметки
 function createComment(comment) {
-  // debugger;
   var currentComment = socialComment.cloneNode(true);
 
   currentComment.querySelector('.social__picture').setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
@@ -277,7 +274,6 @@ function createComment(comment) {
 renderPictures(fotos);
 
 function changeBigPicture(basePicture) {
-  // debugger;
   bigPicture.querySelector('.big-picture__img').children[0].setAttribute('src', basePicture.user);
   bigPicture.querySelector('.likes-count').textContent = basePicture.likes;
   bigPicture.querySelector('.comments-count').textContent = bigPicture.comments.length;
@@ -345,7 +341,6 @@ function validateComment(input) {
 }
 
 function findSameHashtags(array, item) {
-  // debugger;
   var hashtags = [];
   var wordiIdx = array.indexOf(item);
   while (wordiIdx !== -1) {
