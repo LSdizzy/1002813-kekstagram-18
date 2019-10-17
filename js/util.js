@@ -1,6 +1,6 @@
 'use strict'
 
-window.until = (function() {
+window.util = (function() {
   window.ESC_KEYCODE = 27;
   window.ENTER_KEYCODE = 13;
 
@@ -10,12 +10,12 @@ window.until = (function() {
   return {
     isEscEvent: function(evt, action) {
       if (evt.keyCode === ESC_KEYCODE && hashtagsInput !== evt.target && commentInput !== evt.target) {
-        closePreview();
+        window.gallery.closePreview();
       }
     },
     isEnterEvent: function(evt,action) {
       if (evt.kayCode === ENTER_KEYCODE) {
-        closePreview();
+        window.gallery.closePreview();
       }
     },
     randomInteger: function(min, max) {
@@ -25,6 +25,10 @@ window.until = (function() {
     },
     findRandomValue: function(num) {
       return Math.floor(Math.random() * num);
+    },
+    findCurrentIndex: function(collection, target) {
+      var index = Array.prototype.slice.call(collection).indexOf(target);
+      return index;
     }
   };
 })();

@@ -28,13 +28,13 @@ window.picture = (function(){
       pictureElement.querySelector('.picture__img').setAttribute('src', picture.user);
       pictureElement.querySelector('.picture__likes').textContent = picture.likes;
       pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
-      pictureElement.querySelector('picture').setAttribute('tabindex', '0');//для валидности
+      // pictureElement.querySelector('picture').setAttribute('tabindex', '0');//для валидности
 
       return pictureElement;
     },
 
     //функция генерации коментариев
-    function generateComments() {
+    generateComments: function() {
       var comments = [];
       var commentsNum = window.util.randomInteger(1, 4);
       var comment;
@@ -49,7 +49,7 @@ window.picture = (function(){
       return comments;
     },
 
-    function generatePictures(arr) {
+    generatePictures: function(arr) {
       var element;
 
       for (var i = 1; i <= PICTURES_NUM; i++) {
@@ -64,7 +64,7 @@ window.picture = (function(){
       }
     },
     //функция помешения на страницу дом-элементо
-    function renderPictures(arr) {
+    renderPictures: function(arr) {
       var fragment = document.createDocumentFragment();
 
       for (var i = 0; i < arr.length; i++) {
@@ -73,6 +73,7 @@ window.picture = (function(){
       listPicture.appendChild(fragment);
     }
   };
-
+   window.picture.generatePictures(fotos);
+  window.picture.renderPictures(fotos);
 
 })();

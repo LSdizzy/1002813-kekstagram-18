@@ -1,16 +1,15 @@
-'use strict'
 
 (function() {
 
   var listPicture = document.querySelector('.pictures');
-  var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');
-  var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
+  var uploadFotoOverlay = listPicture.querySelector('.img-upload__overlay');
+  var fotoFiltersSlider = listPicture.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
 
   var bigPicture = document.querySelector('.big-picture');
   var closeBigPicture = bigPicture.querySelector('.big-picture__cancel');
 
-  var uploadFileInput = uploadImages.querySelector('.img-upload__input');//поле загрузки фильтров
-  var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//зачек крестика
+  var uploadFileInput = listPicture.querySelector('.img-upload__input');//поле загрузки фильтров
+  var closeFotoPreview = listPicture.querySelector('.img-upload__cancel');//зачек крестика
 
   var onPreviewEscPress = function (evt) {
     window.util.isEscEvent(evt, closePreview);
@@ -18,14 +17,14 @@
 
   var openPreview = function () {
     uploadFotoOverlay.classList.remove('hidden');
-    uploadImages.querySelector('#effect-none').checked = true;//значение по умолчанию
+    listPicture.querySelector('#effect-none').checked = true;//значение по умолчанию
     fotoFiltersSlider.classList.add('hidden');//без слайдера на оригинале
     document.addEventListener('keydown', onPreviewEscPress);//закрытие окна на esc
   };
 
   var closePreview = function() {
     uploadFotoOverlay.classList.add('hidden');
-    uploadFileInput.value = '';// надо ли??
+    // uploadFileInput.value = '';// надо ли??
     document.removeEventListener('keydown', onPreviewEscPress);
   };
 
@@ -61,7 +60,7 @@
 
   // Пустой массив для хранения фотографий пользователей
   var fotos = [];
-
+  debugger;
   window.picture.generatePictures(fotos);
   window.picture.renderPictures(fotos);
   openPopup();
