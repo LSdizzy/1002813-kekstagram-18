@@ -30,9 +30,9 @@ var listPicture = document.querySelector('.pictures');
 
 var pictureTemplate = document.querySelector('#picture').content;
 
-var pin = document.querySelector('.effect-level__pin');//кнопка изменения глубыины эффекта
-var pinValue = document.querySelector('effect-level__value');//значение кнопки наложеного эффекта
-var pinDepth = document.querySelector('.effect-level__depth');//полоса насыщености эфекта (линия насыщености)
+// var pin = document.querySelector('.effect-level__pin');//кнопка изменения глубыины эффекта
+// var pinValue = document.querySelector('effect-level__value');//значение кнопки наложеного эффекта
+// var pinDepth = document.querySelector('.effect-level__depth');//полоса насыщености эфекта (линия насыщености)
 
 var socialComments = document.querySelector('.social__comments');
 var socialComment = document.querySelector('.social__comment');
@@ -45,12 +45,14 @@ var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//за�
 var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');
 uploadFotoOverlay.classList.add('.hidden');//форма редактирования
 var uploadFotoPreview = uploadImages.querySelector('.img-upload__preview');//пред просмотр
-var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
+
+// var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
 
-var hashtagsInput = uploadImages.querySelector('.text__hashtags');//поле ввода хештегов
-var commentInput = uploadImages.querySelector('.text__description');//поле ввода коментариев
-var submitFormBtn = uploadImages.querySelector('.img-upload__submit');//кнопка отправки формы
+// var hashtagsInput = uploadImages.querySelector('.text__hashtags');//поле ввода хештегов
+// var commentInput = uploadImages.querySelector('.text__description');//поле ввода коментариев
+// var submitFormBtn = uploadImages.querySelector('.img-upload__submit');//кнопка отправки формы
+
 
 // var minArrow = uploadImages.querySelector('.scale__control--smaller');//стрелка мин
 // var maxArrow = uploadImages.querySelector('.scale__control--bigger ');//стрелка макс
@@ -211,6 +213,7 @@ function randomInteger(min, max) {
   return Math.floor(rand);
 }
 
+
 //функция генерации коментариев
 function generateComments() {
   var comments = [];
@@ -246,7 +249,7 @@ function createPicture(picture) {
   pictureElement.querySelector('.picture__img').setAttribute('src', picture.user);
   pictureElement.querySelector('.picture__likes').textContent = picture.likes;
   pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
-  // pictureElement.querySelector('picture').setAttribute('tabindex', '0');//для валидности
+  pictureElement.querySelector('picture').setAttribute('tabindex', '0');//для валидности
 
   return pictureElement;
 }
