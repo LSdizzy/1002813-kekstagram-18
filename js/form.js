@@ -1,16 +1,25 @@
-'use strict'
+'use strict';
 
-(function() {
-  var hashtagsInput = uploadImages.querySelector('.text__hashtags');//поле ввода хештегов
-  var commentInput = uploadImages.querySelector('.text__description');//поле ввода коментариев
-  var submitFormBtn = uploadImages.querySelector('.img-upload__submit');//кнопка отправки формы
+(function () {
+  var uploadImages = document.querySelector('.img-upload');
+  var hashtagsInput = uploadImages.querySelector('.text__hashtags'); // поле ввода хештегов
+  var commentInput = uploadImages.querySelector('.text__description'); // поле ввода коментариев
+  // var submitFormBtn = uploadImages.querySelector('.img-upload__submit'); // кнопка отправки формы
 
-  var pin = document.querySelector('.effect-level__pin');//кнопка изменения глубыины эффекта
-  var pinValue = document.querySelector('effect-level__value');//значение кнопки наложеного эффекта
-  var pinDepth = document.querySelector('.effect-level__depth');//полоса насыщености эфекта (линия насыщености)
+  var pin = document.querySelector('.effect-level__pin'); // кнопка изменения глубыины эффекта
+  var pinValue = document.querySelector('effect-level__value'); // значение кнопки наложеного эффекта
+  var pinDepth = document.querySelector('.effect-level__depth'); // полоса насыщености эфекта (линия насыщености)
 
-  var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
-  var uploadForm = document.querySelector('.img-upload__form');//форма
+  var uploadEffectsList = document.querySelector('.img-upload__effects'); // список фильтров
+  var uploadForm = document.querySelector('.img-upload__form'); // форма
+
+  function resetForm(form) {
+    form.submit();
+    setTimeout(function () {
+      form.reset();
+      window.filter.dropFilter();
+    }, 100);
+  }
 
   hashtagsInput.addEventListener('input', function () {
     window.validation.validateHahtags(hashtagsInput);
@@ -20,34 +29,60 @@
     window.validation.validateComment(commentInput);
   });
 
-  //работа с фильтром
+  uploadForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    resetForm(uploadForm);
+  });
+
+  // работа с фильтром
   uploadEffectsList.addEventListener('change', function (evt) {
     var targetValue = evt.target.value;
     window.filter.changeFotoFilter(targetValue);
   });
 
-  pin.addEventListener('mouseup', function(evt) {
+  pin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-    var deviation;
-    var percent;
 
     var startCoords = {
-      x: evt.clientX
+      x: evt.clientX,
     };
 
-    var shift = {
-      x: startCoords.x - evt.clientX
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      var deviation;
+      var percent;
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+      };
+
+      deviation = pin.offsetLeft - shift.x;
+      // Расчет (%) нахождения текущего подложения пина относительно шкалы изменения насыщенности
+      percent = Math.ceil((deviation * 100) / window.MAX_CLIENT_X);
+
+
+      if (deviation >= window.MIN_CLIENT_X && deviation <= window.MAX_CLIENT_X) {
+        pin.style.left = deviation + 'px';
+        pinValue.setAttribute('value', percent);
+        pinDepth.style.width = percent + '%';
+        window.filter.filtration(percent);
+      }
+
     };
 
-    deviation = pin.offsetLeft - shift.x;
-    percent = Math.ceil((deviation * 100) / window.MAX_CLIENT_X);//Расчет % текущего подложения пина относительно шкалы
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
 
-    if (deviation >= window.MIN_CLIENT_X && deviation <= window.MAX_CLIENT_X) {
-      pin.style.left = deviation + 'px';
-      // pinValue.setAttribute('value', percent);
-      pinDepth.style.width = percent + '%';//Принимает процентное соотношение
-      window.filter.filtration(percent);
-    }
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 
 })();

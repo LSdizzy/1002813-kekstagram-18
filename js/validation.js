@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
-window.validation = (function(){
+(function () {
 
   var MAX_HASH_TAGS = 5;
   var MAX_HASH_TAG_LENGTH = 20;
   var MAX_COMMENT_LENGTH = 140;
 
-  return {
+  window.validation = {
 
-    findSameHashtags:  function (array, item) {
+    findSameHashtags: function (array, item) {
       var hashtags = [];
       var wordIdx = array.indexOf(item);
-      while (wordiIdx !== -1) {
+      while (wordIdx !== -1) {
         hashtags.push(wordIdx);
         wordIdx = array.indexOf(item, wordIdx + 1);
       }
@@ -23,16 +23,16 @@ window.validation = (function(){
     },
 
 
-    validateHahtags: function(input) {
+    validateHahtags: function (input) {
       var hashtagsArray = input.value.toLowerCase().split(' ');
       var currentElement;
       for (var i = 0; i < hashtagsArray.length; i++) {
         currentElement = hashtagsArray[i];
         if (hashtagsArray.indexOf(' ') !== -1) {
-        input.setCustomValidity('хэш-теги разделяются пробелами');
+          input.setCustomValidity('хэш-теги разделяются пробелами');
         } else if (currentElement.charAt(0) !== '#') {
           input.setCustomValidity('хештег должен начинаться с символа #');
-        } else if (findSameHashtags(hashtagsArray, currentElement)) {
+        } else if (window.validation.findSameHashtags(hashtagsArray, currentElement)) {
           input.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
         } else if (currentElement.length <= 1) {
           input.setCustomValidity('хештег не должен состоять только из символа #');
@@ -46,7 +46,7 @@ window.validation = (function(){
       }
     },
 
-    validateComment: function(input) {
+    validateComment: function (input) {
       if (input.value.length > MAX_COMMENT_LENGTH) {
         input.setCustomValidity('длина комментария не может составлять больше 140 символов');
       } else {

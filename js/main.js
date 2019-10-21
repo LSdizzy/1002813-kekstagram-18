@@ -26,6 +26,7 @@ var USER_DESCRIPTION = [
   'О у меня такая тачка!'
 ];
 
+
 var listPicture = document.querySelector('.pictures');
 
 var pictureTemplate = document.querySelector('#picture').content;
@@ -211,7 +212,7 @@ function randomInteger(min, max) {
   return Math.floor(rand);
 }
 
-функция генерации коментариев
+// функция генерации коментариев
 function generateComments() {
   var comments = [];
   var commentsNum = findRandomValue(5) + COMMENTS_MINIMUM_NUM;
