@@ -7,7 +7,7 @@
   // var submitFormBtn = uploadImages.querySelector('.img-upload__submit'); // кнопка отправки формы
 
   var pin = document.querySelector('.effect-level__pin'); // кнопка изменения глубыины эффекта
-  var pinValue = document.querySelector('effect-level__value'); // значение кнопки наложеного эффекта
+  var pinValue = document.querySelector('.effect-level__value'); // значение кнопки наложеного эффекта
   var pinDepth = document.querySelector('.effect-level__depth'); // полоса насыщености эфекта (линия насыщености)
 
   var uploadEffectsList = document.querySelector('.img-upload__effects'); // список фильтров

@@ -1,18 +1,18 @@
 'use strict';
 
-window.preview = (function () {
+(function () {
   var socialComments = document.querySelector('.social__comments');
   var socialComment = document.querySelector('.social__comment');
   var socialCommentCount = document.querySelector('.social__comment-count');
   var commentsLoader = document.querySelector('.comments-loader');
   var bigPicture = document.querySelector('.big-picture');
 
-  return {
+  window.preview = {
     // Функция создания DOM-элемента комментарий к bigFoto с помощью разметки
     createComment: function (comment) {
       var currentComment = socialComment.cloneNode(true);
 
-      currentComment.querySelector('.social__picture').setAttribute('src', 'img/avatar-' + window.util.randomInteger(1, 6) + '.svg');
+      currentComment.querySelector('.social__picture').setAttribute('src', 'img/avatar-' + window.util.randomInteger(1, 10) + '.svg');
       currentComment.querySelector('.social__text').textContent = comment;
 
       return currentComment;
@@ -21,8 +21,8 @@ window.preview = (function () {
     changeBigPicture: function (basePicture) {
       bigPicture.querySelector('.big-picture__img').children[0].setAttribute('src', basePicture.user);
       bigPicture.querySelector('.likes-count').textContent = basePicture.likes;
-      bigPicture.querySelector('.comments-count').textContent = bigPicture.comments.length;
-      bigPicture.querySelector('social__caption').textContent = bigPicture.description;
+      bigPicture.querySelector('.comments-count').textContent = basePicture.comments.length;
+      bigPicture.querySelector('.social__caption').textContent = basePicture.description;
     },
 
     pasteBigPicture: function (baseElement) {

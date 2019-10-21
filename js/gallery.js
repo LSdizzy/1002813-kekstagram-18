@@ -82,7 +82,7 @@
 
     if (target.parentNode.classList.contains('picture')) {
       openPopup();
-      currentElement = window.util.findCurrentIndex(window.photoCollection, target.parentNode);
+      currentElement = window.util.findCurrentIndex(window.fotoCollection, target.parentNode);
       window.preview.pasteBigPicture(fotos[currentElement]);
     }
   });
@@ -94,7 +94,7 @@
 
     if (evt.keyCode === window.ENTER_KEYCODE && target.classList.contains('picture')) {
       openPopup();
-      currentElement = window.util.findCurrentIndex(window.photoCollection, target.parentNode);
+      currentElement = window.util.findCurrentIndex(window.fotoCollection, target.parentNode);
       window.preview.pasteBigPicture(fotos[currentElement]);
     }
   });

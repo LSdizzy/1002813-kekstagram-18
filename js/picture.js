@@ -72,6 +72,7 @@
         fragment.appendChild(window.picture.createPicture(arr[i]));
       }
       listPicture.appendChild(fragment);
+      window.fotoCollection = document.querySelectorAll('.picture');
     }
   };
 
