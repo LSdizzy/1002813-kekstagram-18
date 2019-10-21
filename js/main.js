@@ -26,7 +26,6 @@ var USER_DESCRIPTION = [
   'О у меня такая тачка!'
 ];
 
-
 var listPicture = document.querySelector('.pictures');
 
 var pictureTemplate = document.querySelector('#picture').content;
@@ -46,12 +45,14 @@ var closeFotoPreview = uploadImages.querySelector('.img-upload__cancel');//за�
 var uploadFotoOverlay = uploadImages.querySelector('.img-upload__overlay');
 uploadFotoOverlay.classList.add('.hidden');//форма редактирования
 var uploadFotoPreview = uploadImages.querySelector('.img-upload__preview');//пред просмотр
+
 // var uploadEffectsList = document.querySelector('.img-upload__effects');//список фильтров
 var fotoFiltersSlider = uploadImages.querySelector('.img-upload__effect-level');//слайдер изменения глубины эффекта
 
 // var hashtagsInput = uploadImages.querySelector('.text__hashtags');//поле ввода хештегов
 // var commentInput = uploadImages.querySelector('.text__description');//поле ввода коментариев
 // var submitFormBtn = uploadImages.querySelector('.img-upload__submit');//кнопка отправки формы
+
 
 // var minArrow = uploadImages.querySelector('.scale__control--smaller');//стрелка мин
 // var maxArrow = uploadImages.querySelector('.scale__control--bigger ');//стрелка макс
@@ -212,7 +213,8 @@ function randomInteger(min, max) {
   return Math.floor(rand);
 }
 
-// функция генерации коментариев
+
+//функция генерации коментариев
 function generateComments() {
   var comments = [];
   var commentsNum = findRandomValue(5) + COMMENTS_MINIMUM_NUM;
