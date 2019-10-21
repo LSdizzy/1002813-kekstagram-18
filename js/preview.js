@@ -12,7 +12,7 @@
     createComment: function (comment) {
       var currentComment = socialComment.cloneNode(true);
 
-      currentComment.querySelector('.social__picture').setAttribute('src', 'img/avatar-' + window.util.randomInteger(1, 10) + '.svg');
+      currentComment.querySelector('.social__picture').setAttribute('src', 'img/avatar-' + window.util.randomInteger(1, 3) + '.svg');
       currentComment.querySelector('.social__text').textContent = comment;
 
       return currentComment;

@@ -41,7 +41,7 @@
       var comment;
 
       for (var i = 0; i < commentsNum; i++) {
-        comment = USER_COMMENTS[window.util.findRandomValue(USER_COMMENTS)];
+        comment = USER_COMMENTS[window.util.findRandomValue(6)];
         if (comments.indexOf(comment) === -1) {
           comments.push(comment);
         }

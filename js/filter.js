@@ -39,7 +39,7 @@
       } else if (currentFilter !== 'none') {
         uploadFotoPreview.style.filter = 'blur(3px)';
       } else if (currentFilter !== 'none') {
-        uploadFotoPreview.style.filter = 'brightness(3)';
+        uploadFotoPreview.style.filter = 'brightness(0.03)';
       } else {
         uploadFotoPreview.setAttribute('class', DEFAULT_PHOTO_FILTER);
         fotoFiltersSlider.classList.add('hidden');
