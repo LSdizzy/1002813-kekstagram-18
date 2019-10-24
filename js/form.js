@@ -52,7 +52,7 @@
     evt.preventDefault();
     window.xhr.save(new FormData(uploadForm), function () {
 
-      openSuccessPopUp();
+      openSuccessPopup();
 
       sucessBtn.addEventListener('click', closeSuccessPopup);
 
