@@ -1,6 +1,6 @@
 'use strict';
-window.backend = (function () {
-  var URL = 'https://js.dump.academy/kekstagram/data';
+window.xhr = (function () {
+  var URL = 'https://js.dump.academy/kekstagram';
   var errorPopup = document.querySelector('#error').content;
 
 
