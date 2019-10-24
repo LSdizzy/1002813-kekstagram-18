@@ -1,10 +1,8 @@
 'use strict';
-
 (function () {
   var uploadImages = document.querySelector('.img-upload');
   var hashtagsInput = uploadImages.querySelector('.text__hashtags'); // поле ввода хештегов
   var commentInput = uploadImages.querySelector('.text__description'); // поле ввода коментариев
-  // var submitFormBtn = uploadImages.querySelector('.img-upload__submit'); // кнопка отправки формы
 
   var listPicture = document.querySelector('.pictures');
   var uploadFotoOverlay = listPicture.querySelector('.img-upload__overlay');

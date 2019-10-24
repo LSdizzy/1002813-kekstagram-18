@@ -5,7 +5,6 @@
   var listPicture = document.querySelector('.pictures');
   var uploadFotoOverlay = listPicture.querySelector('.img-upload__overlay');
   var fotoFiltersSlider = listPicture.querySelector('.img-upload__effect-level');// слайдер изменения глубины эффекта
-  // var uploadImages = document.querySelector('.img-upload');
 
   var bigPicture = document.querySelector('.big-picture');
   var closeBigPicture = bigPicture.querySelector('.big-picture__cancel');
@@ -30,7 +29,6 @@
 
   var closePreview = function () {
     uploadFotoOverlay.classList.add('hidden');
-    // uploadFileInput.value = '';// надо ли??
     document.removeEventListener('keydown', onPreviewEscPress);
   };
 
@@ -63,21 +61,16 @@
   });
 
   closeFotoPreview.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.ENTER_KEYCODE) {
-      closePreview();
-    }
+    window.util.isEnterEvent(evt, closePreview);
   });
 
   // Пустой массив для хранения фотографий пользователей
   var fotos = [];
-  // window.picture.generatePictures(fotos);
-  // window.picture.renderPictures(fotos);
   window.xhr.load(window.picture.renderPictures, window.xhr.error);
 
 
   // Показ оверлея с текущей выбранной картинки при клике
   listPicture.addEventListener('click', function (evt) {
-    // debugger;
     var target = evt.target;
     var currentElement;
 

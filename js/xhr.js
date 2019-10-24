@@ -2,7 +2,11 @@
 window.xhr = (function () {
   var URL = 'https://js.dump.academy/kekstagram';
   var errorPopup = document.querySelector('#error').content;
-
+  var OK = 200;
+  var BAD_REQUEST = 400;
+  var NOT_FOUND = 404;
+  var UNAUTHORIZED = 401;
+  var SERVER_ERROR = 500;
 
   var sendRequest = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
@@ -11,20 +15,20 @@ window.xhr = (function () {
 
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case 200:
+        case OK:
           window.data = xhr.response;
           onSuccess(xhr.response);
           break;
-        case 400:
+        case BAD_REQUEST:
           onError(xhr.status + xhr.statusText + 'Неверный запрос');
           break;
-        case 404:
+        case NOT_FOUND:
           onError(xhr.status + xhr.statusText + 'Ничего не найдено');
           break;
-        case 401:
+        case UNAUTHORIZED:
           onError(xhr.status + xhr.statusText + 'Пользователь не авторизован');
           break;
-        case 500:
+        case SERVER_ERROR:
           onError(xhr.status + xhr.statusText + 'Ошибка сервера');
           break;
         default:

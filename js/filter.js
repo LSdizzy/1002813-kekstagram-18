@@ -2,7 +2,6 @@
 
 (function () {
   var pin = document.querySelector('.effect-level__pin'); // кнопка изменения глубыины эффекта
-  // var pinValue = document.querySelector('effect-level__value'); // значение кнопки наложеного эффекта
   var pinDepth = document.querySelector('.effect-level__depth'); // полоса насыщености эфекта (линия насыщености)
 
   var listPicture = document.querySelector('.pictures');
@@ -12,7 +11,7 @@
   window.MIN_CLIENT_X = 0; // мин координата пина относительно левого края
   window.MAX_CLIENT_X = 445; // макс координата пина относительно правого края
   var MAX_DEPTH_VAL = 100; // макс значение глубины цвета
-  var DEFAULT_PHOTO_FILTER = 'img-upload__preview';
+  var DEFAULT_FOTO_FILTER = 'img-upload__preview';
 
   window.filter = {
     // Функция сброса значение фильтров
@@ -28,7 +27,7 @@
 
       if (currentFilter !== 'none') {
         fotoFiltersSlider.classList.remove('hidden');
-        uploadFotoPreview.setAttribute('class', DEFAULT_PHOTO_FILTER);
+        uploadFotoPreview.setAttribute('class', DEFAULT_FOTO_FILTER);
         uploadFotoPreview.classList.add('effects__preview--' + currentFilter);
       } else if (currentFilter !== 'none') {
         uploadFotoPreview.style.filter = 'grayscale(1)';
@@ -41,7 +40,7 @@
       } else if (currentFilter !== 'none') {
         uploadFotoPreview.style.filter = 'brightness(0.03)';
       } else {
-        uploadFotoPreview.setAttribute('class', DEFAULT_PHOTO_FILTER);
+        uploadFotoPreview.setAttribute('class', DEFAULT_FOTO_FILTER);
         fotoFiltersSlider.classList.add('hidden');
       }
     },
