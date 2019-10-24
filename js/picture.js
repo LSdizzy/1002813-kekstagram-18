@@ -34,37 +34,6 @@
 
       return pictureElement;
     },
-
-    // функция генерации коментариев
-    generateComments: function () {
-      var comments = [];
-      var commentsNum = window.util.randomInteger(1, 4);
-      var comment;
-
-      for (var i = 0; i < commentsNum; i++) {
-        comment = USER_COMMENTS[window.util.findRandomValue(6)];
-        if (comments.indexOf(comment) === -1) {
-          comments.push(comment);
-        }
-      }
-
-      return comments;
-    },
-
-    generatePictures: function (arr) {
-      var element;
-
-      for (var i = 1; i <= PICTURES_NUM; i++) {
-        element = {
-          user: 'photos/' + i + '.jpg',
-          likes: window.util.randomInteger(MIN_LIKES, MAX_LIKES),
-          comments: window.picture.generateComments(),
-          description: USER_DESCRIPTION[window.util.findRandomValue(USER_DESCRIPTION)]
-        };
-
-        arr.push(element);
-      }
-    },
     // функция помешения на страницу дом-элементо
     renderPictures: function (arr) {
       var fragment = document.createDocumentFragment();
