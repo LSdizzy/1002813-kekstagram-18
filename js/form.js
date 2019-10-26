@@ -5,7 +5,7 @@
   var commentInput = uploadImages.querySelector('.text__description'); // поле ввода коментариев
 
   var listPicture = document.querySelector('.pictures');
-  var uploadFotoOverlay = listPicture.querySelector('.img-upload__overlay');
+  var uploadPhotoOverlay = listPicture.querySelector('.img-upload__overlay');
 
   var sucessPopup = document.querySelector('#success').content;
   var sucessBtn = sucessPopup.querySelector('.success__button');
@@ -32,7 +32,7 @@
 
   var openSuccessPopup = function () {
     document.querySelector('main').appendChild(sucessPopup);
-    uploadFotoOverlay.classList.add('hidden');
+    uploadPhotoOverlay.classList.add('hidden');
     document.addEventListener('keydown', onSuccessPopupEscPress);
   };
 
@@ -67,7 +67,7 @@
   // работа с фильтром
   uploadEffectsList.addEventListener('change', function (evt) {
     var targetValue = evt.target.value;
-    window.filter.changeFotoFilter(targetValue);
+    window.filter.changePhotoFilter(targetValue);
   });
 
   pin.addEventListener('mousedown', function (evt) {
