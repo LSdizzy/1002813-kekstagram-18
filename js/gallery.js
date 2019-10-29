@@ -66,31 +66,7 @@
   });
 
   // Пустой массив для хранения фотографий пользователей
-  var photos = [];
+
   window.xhr.load(window.picture.renderPictures, window.xhr.error);
-
-
-  // Показ оверлея с текущей выбранной картинки при клике
-  listPicture.addEventListener('click', function (evt) {
-    var target = evt.target;
-    var currentElement;
-
-    if (target.parentNode.classList.contains('picture')) {
-      openPopup();
-      currentElement = window.util.findCurrentIndex(window.photoCollection, target.parentNode);
-      window.preview.pasteBigPicture(window.data[currentElement]);
-    }
-  });
-
-  // Показ оверлея с текущей выбранной картинки при нажатии клавиши
-  listPicture.addEventListener('keydown', function (evt) {
-    var target = evt.target;
-    var currentElement;
-
-    if (evt.keyCode === window.ENTER_KEYCODE && target.classList.contains('picture')) {
-      openPopup();
-      currentElement = window.util.findCurrentIndex(window.photoCollection, target.parentNode);
-      window.preview.pasteBigPicture(window.data[currentElement]);
-    }
-  });
+  window.openPopup = openPopup;
 })();
