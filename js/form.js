@@ -1,10 +1,14 @@
 'use strict';
-
 (function () {
   var uploadImages = document.querySelector('.img-upload');
   var hashtagsInput = uploadImages.querySelector('.text__hashtags'); // поле ввода хештегов
   var commentInput = uploadImages.querySelector('.text__description'); // поле ввода коментариев
-  // var submitFormBtn = uploadImages.querySelector('.img-upload__submit'); // кнопка отправки формы
+
+  var listPicture = document.querySelector('.pictures');
+  var uploadPhotoOverlay = listPicture.querySelector('.img-upload__overlay');
+
+  var sucessPopup = document.querySelector('#success').content;
+  var sucessBtn = sucessPopup.querySelector('.success__button');
 
   var pin = document.querySelector('.effect-level__pin'); // кнопка изменения глубыины эффекта
   var pinValue = document.querySelector('.effect-level__value'); // значение кнопки наложеного эффекта
@@ -21,6 +25,21 @@
     }, 100);
   }
 
+  var closeSuccessPopup = function () {
+    document.querySelector('.success').classList.add('hidden');
+    resetForm(uploadForm);
+  };
+
+  var openSuccessPopup = function () {
+    document.querySelector('main').appendChild(sucessPopup);
+    uploadPhotoOverlay.classList.add('hidden');
+    document.addEventListener('keydown', onSuccessPopupEscPress);
+  };
+
+  var onSuccessPopupEscPress = function (evt) {
+    window.util.isEscEvent(evt, closeSuccessPopup);
+  };
+
   hashtagsInput.addEventListener('input', function () {
     window.validation.validateHahtags(hashtagsInput);
   });
@@ -31,13 +50,24 @@
 
   uploadForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    resetForm(uploadForm);
+    window.xhr.save(new FormData(uploadForm), function () {
+
+      openSuccessPopup();
+
+      sucessBtn.addEventListener('click', closeSuccessPopup);
+
+      sucessBtn.addEventListener('keydown', function (evt) {
+        window.util.isEnterEvent(evt, closeSuccessPopup);
+      });
+
+
+    }, window.xhr.error);
   });
 
   // работа с фильтром
   uploadEffectsList.addEventListener('change', function (evt) {
     var targetValue = evt.target.value;
-    window.filter.changeFotoFilter(targetValue);
+    window.filter.changePhotoFilter(targetValue);
   });
 
   pin.addEventListener('mousedown', function (evt) {
@@ -84,5 +114,4 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-
 })();

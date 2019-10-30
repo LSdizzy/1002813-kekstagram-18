@@ -1,20 +1,20 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
+  window.ESC_KEYCODE = 27;
+  window.ENTER_KEYCODE = 13;
 
   var hashtagsInput = document.querySelector('.text__hashtags');// поле ввода хештегов
   var commentInput = document.querySelector('.text__description');// поле ввода коментариев
 
   window.util = {
     isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE && hashtagsInput !== evt.target && commentInput !== evt.target) {
+      if (evt.keyCode === window.ESC_KEYCODE && hashtagsInput !== evt.target && commentInput !== evt.target) {
         action();
       }
     },
     isEnterEvent: function (evt, action) {
-      if (evt.kayCode === ENTER_KEYCODE) {
+      if (evt.kayCode === window.ENTER_KEYCODE) {
         action();
       }
     },
