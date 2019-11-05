@@ -4,21 +4,14 @@
   window.ESC_KEYCODE = 27;
   window.ENTER_KEYCODE = 13;
 
-  var hashtagsInput = document.querySelector('.text__hashtags');// поле ввода хештегов
-  var commentInput = document.querySelector('.text__description');// поле ввода коментариев
-
   window.util = {
-    isEscEvent: function (evt, action) {
-      if (evt.keyCode === window.ESC_KEYCODE && hashtagsInput !== evt.target && commentInput !== evt.target) {
-        action();
-      }
+    isEscEvent: function (evt) {
+      return evt.keyCode === window.ENTER_KEYCODE;
     },
     isEnterEvent: function (evt, action) {
-      if (evt.kayCode === window.ENTER_KEYCODE) {
-        action();
-      }
+      return evt.keyCode === window.ESC_KEYCODE;
     },
-    randomInteger: function (min, max) {
+    findRandomInteger: function (min, max) {
       var rand = min + Math.random() * (max + 1 - min);
       rand = Math.floor(rand);
       return rand;
@@ -29,6 +22,9 @@
     findCurrentIndex: function (collection, target) {
       var index = Array.prototype.slice.call(collection).indexOf(target);
       return index;
+    },
+    compareRandom: function (a, b) {
+      return Math.random() - 0.5;
     }
   };
 })();
