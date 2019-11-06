@@ -3,7 +3,7 @@
 (function () {
   var URL = 'https://js.dump.academy/kekstagram';
   var DEFAULT_SCALE_VALUE = 100;
-  var DAFAULT_FILTER_INTENSITY = 100;
+  var DEFAULT_FILTER_INTENSITY = 100;
 
   var fileInput = document.querySelector('#upload-file');
   var uploadPicture = document.querySelector('.img-upload__preview img');
@@ -25,6 +25,8 @@
   var filterIntensityInput = filterIntensityControl.querySelector('.effect-level__value');
   var imgUploadSubmit = document.querySelector('.img-upload__submit');
   var textHashtagsInput = document.querySelector('.text__hashtags');
+  var defaultPreviewPicture = pictureEditor.querySelector('#effect-none');
+  var descriptionTextarea = document.querySelector('.text__description');
 
   function openPictureEditor() {
     pictureEditorCloseButton.addEventListener('click', onPictureEditorCloseButtonClick);
@@ -59,7 +61,6 @@
   }
 
   function resetForm() {
-    var defaultPreviewPicture = pictureEditor.querySelector('#effect-none');
     defaultPreviewPicture.checked = true;
     uploadPicture.style.transform = 'scale(${DEFAULT_SCALE_VALUE / 100})';
     scaleValueInput.value = DEFAULT_SCALE_VALUE + '%';
@@ -70,7 +71,6 @@
   }
 
   function clearFormData() {
-    var descriptionTextarea = document.querySelector('.text__description');
     descriptionTextarea.value = '';
 
     textHashtagsInput.value = '';
@@ -86,7 +86,7 @@
   function onDocumentKeydown(evt) {
     var target = evt.target;
 
-    if (window.util.isEscEvent(evt) && target.className !== 'text__hashtags' && target.className !== 'text__description') {
+    if (window.util.isEscEvent(evt) && target.className !== textHashtagsInput && target.className !== descriptionTextarea) {
       closePictureEditor();
     }
   }
@@ -106,18 +106,18 @@
   }
 
   function onScaleDecreaseButtonClick() {
-    window.scaleUtils.decreaseScale(scaleValueInput, uploadPicture);
+    window.util.decreaseScale(scaleValueInput, uploadPicture);
   }
 
   function onScaleIncreaseButtonClick() {
-    window.scaleUtils.increaseScale(scaleValueInput, uploadPicture);
+    window.util.increaseScale(scaleValueInput, uploadPicture);
   }
 
   function onFiltersListClick(evt) {
     if (evt.target.classList.contains('effects__radio')) {
-      updateFilterIntensityControl(DAFAULT_FILTER_INTENSITY);
-      uploadPicture.style.filter = getPictureFilter(evt.target.id, DAFAULT_FILTER_INTENSITY);
-      filterIntensityInput.value = DAFAULT_FILTER_INTENSITY;
+      updateFilterIntensityControl(DEFAULT_FILTER_INTENSITY);
+      uploadPicture.style.filter = getPictureFilter(evt.target.id, DEFAULT_FILTER_INTENSITY);
+      filterIntensityInput.value = DEFAULT_FILTER_INTENSITY;
 
       if (evt.target.id === 'effect-none') {
         filterIntensityControl.classList.add('hidden');
@@ -127,7 +127,7 @@
     }
   }
 
-  function onFilterIntensityPinMousedown(evt) {
+  function onFilterIntensityPinMousedown() {
     document.addEventListener('mousemove', onDocumentMousemove);
     document.addEventListener('mouseup', onDocumentMouseup);
   }
@@ -136,7 +136,7 @@
     changeFilterIntensity(evt.clientX);
   }
 
-  function onDocumentMouseup(evt) {
+  function onDocumentMouseup() {
     document.removeEventListener('mousemove', onDocumentMousemove);
     document.removeEventListener('mouseup', onDocumentMouseup);
   }
@@ -145,25 +145,25 @@
     changeFilterIntensity(evt.clientX);
   }
 
-  function changeFilterIntensity(x) {
-    var filterIntensity = getFilterIntensity(x);
+  function changeFilterIntensity(value) {
+    var filterIntensity = getFilterIntensity(value);
 
     updateFilterIntensityControl(filterIntensity);
     uploadPicture.style.filter = getPictureFilter(getActivePictureFilterId(), filterIntensity);
     filterIntensityInput.value = filterIntensity;
   }
 
-  function getFilterIntensity(x) {
+  function getFilterIntensity(value) {
     var filterIntensityRangeLeftX = filterIntensityRange.getBoundingClientRect().left;
     var filterIntensityRangeRightX = filterIntensityRange.getBoundingClientRect().right;
 
     var relativeX;
-    if (x < filterIntensityRangeLeftX) {
+    if (value < filterIntensityRangeLeftX) {
       relativeX = 0;
-    } else if (x > filterIntensityRangeRightX) {
+    } else if (value > filterIntensityRangeRightX) {
       relativeX = filterIntensityRange.clientWidth;
     } else {
-      relativeX = (x - filterIntensityRangeLeftX);
+      relativeX = (value - filterIntensityRangeLeftX);
     }
 
     return Math.round(relativeX / filterIntensityRange.clientWidth * 100);

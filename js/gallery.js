@@ -44,7 +44,7 @@
     switch (filterButtonId) {
       case 'filter-popular':
         return picturesInfo;
-      case 'filter-new':
+      case 'filter-random':
         picturesInfo.sort(window.util.findRandomValue);
         picturesInfo.length = FILTERED_NEW_PICTURES_COUNT;
         return picturesInfo;
