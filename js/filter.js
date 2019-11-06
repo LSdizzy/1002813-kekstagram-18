@@ -5,6 +5,13 @@
   var DEFAULT_SCALE_VALUE = 100;
   var DEFAULT_FILTER_INTENSITY = 100;
 
+  var CHROME = 'effect-chrome';
+  var SEPIA = 'effect-sepia';
+  var MARVIN = 'effect-marvin';
+  var PHOBOS = 'effect-phobos';
+  var HEAT = 'effect-heat';
+  var NONE = 'effect-none';
+
   var fileInput = document.querySelector('#upload-file');
   var uploadPicture = document.querySelector('.img-upload__preview img');
   fileInput.addEventListener('change', function () {
@@ -177,17 +184,17 @@
   function getPictureFilter(id, value) {
     var proportion = (3 * value) / 100;
     switch (id) {
-      case 'effect-chrome':
+      case CHROME:
         return 'grayscale(' + value + '% )';
-      case 'effect-sepia':
+      case SEPIA:
         return 'sepia(' + value + '% )';
-      case 'effect-marvin':
+      case MARVIN:
         return 'invert(' + value + '%)';
-      case 'effect-phobos':
+      case PHOBOS:
         return 'blur(' + proportion + 'px)';
-      case 'effect-heat':
+      case HEAT:
         return 'brightness(' + proportion + ')';
-      case 'effect-none':
+      case NONE:
         return 'none';
     }
   }

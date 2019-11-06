@@ -7,6 +7,10 @@
 
   var timerID = null;
 
+  var FILTER_POPULAR = 'filter-popular';
+  var FILTER_RANDOM = 'filter-random';
+  var FILTER_DISCUSSED = 'filter-discussed';
+
   window.backend.load(onSuccessLoad, onErrorLoad, URL);
 
   function onSuccessLoad(picturesInfo) {
@@ -42,13 +46,13 @@
 
   function createFilteredPicturesInfo(picturesInfo, filterButtonId) {
     switch (filterButtonId) {
-      case 'filter-popular':
+      case FILTER_POPULAR:
         return picturesInfo;
-      case 'filter-random':
+      case FILTER_RANDOM:
         picturesInfo.sort(window.util.findRandomValue);
         picturesInfo.length = FILTERED_NEW_PICTURES_COUNT;
         return picturesInfo;
-      case 'filter-discussed':
+      case FILTER_DISCUSSED:
         return picturesInfo.sort(compareCommentsLength);
     }
   }
