@@ -16,6 +16,7 @@
   var uploadPicture = document.querySelector('.img-upload__preview img');
   fileInput.addEventListener('change', function () {
     openPictureEditor();
+    window.setImgElementSrc(fileInput, uploadPicture);
   });
 
   var pictureEditor = document.querySelector('.img-upload__overlay');
