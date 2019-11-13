@@ -47,7 +47,7 @@
     filterIntensityRange.addEventListener('click', onFilterIntensityRangeClick);
     imgUploadSubmit.addEventListener('click', onImgUploadSubmitClick);
     textHashtagsInput.addEventListener('input', onTextHashtagsInputInput);
-
+    filterIntensityControl.classList.add('hidden');
     pictureEditor.classList.remove('hidden');
   }
 
@@ -198,6 +198,8 @@
       case NONE:
         return 'none';
     }
+
+    return value;
   }
 
   function getActivePictureFilterId() {

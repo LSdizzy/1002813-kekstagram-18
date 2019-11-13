@@ -25,12 +25,12 @@
   function getCommentsCountText(commentsCount) {
     var commentsCountString = commentsCount.toString();
 
-    var lastTwoNumbers = parseInt(commentsCountString.slice(-2));
+    var lastTwoNumbers = parseInt(commentsCountString.slice(-2), 10);
     if (lastTwoNumbers >= 11 && lastTwoNumbers <= 14) {
       return commentsCount + ' комментариев';
     }
 
-    var lastNumber = parseInt(commentsCountString.slice(-1));
+    var lastNumber = parseInt(commentsCountString.slice(-1), 10);
     if (lastNumber === 1) {
       return commentsCount + ' комментарий';
     } else if (lastNumber >= 2 && lastNumber <= 4) {
@@ -41,6 +41,7 @@
   }
 
   function renderComments(comments) {
+    debugger;
     var commentsPool = comments.slice();
     socialComments.appendChild(createCommentsFragment(commentsPool));
 

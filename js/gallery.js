@@ -55,6 +55,7 @@
       case FILTER_DISCUSSED:
         return picturesInfo.sort(compareCommentsLength);
     }
+    return true;
   }
 
   function compareCommentsLength(a, b) {
