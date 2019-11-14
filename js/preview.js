@@ -8,7 +8,6 @@
   var bigPicture = document.querySelector('.big-picture');
 
   window.preview = {
-    // Функция создания DOM-элемента комментарий к bigFoto с помощью разметки
     createComment: function (comment) {
       var currentComment = socialComment.cloneNode(true);
 
