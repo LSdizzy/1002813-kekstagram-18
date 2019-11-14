@@ -41,7 +41,6 @@
   }
 
   function renderComments(comments) {
-    debugger;
     var commentsPool = comments.slice();
     socialComments.appendChild(createCommentsFragment(commentsPool));
 

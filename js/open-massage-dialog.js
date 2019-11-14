@@ -2,7 +2,7 @@
 
 (function () {
   window.openMessageDialog = function (errorMessage) {
-    if (errorMessage === null) {
+    if (!errorMessage) {
       openSuccessMessageDialog();
     } else {
       openErrorMessageDialog(errorMessage);
