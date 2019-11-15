@@ -11,7 +11,7 @@
     isEscEvent: function (evt) {
       return evt.keyCode === window.ESC_KEYCODE;
     },
-    isEnterEvent: function (evt, action) {
+    isEnterEvent: function (evt) {
       return evt.keyCode === window.ENTER_KEYCODE;
     },
     findRandomInteger: function (min, max) {
@@ -26,22 +26,22 @@
       var index = Array.prototype.slice.call(collection).indexOf(target);
       return index;
     },
-    decreaseScale: function(valueInput, pictureElement) {
-      var value = parseInt(valueInput.value);
+    decreaseScale: function (valueInput, pictureElement) {
+      var value = parseInt(valueInput.value, 10);
       var newValue = value - SCALE_STEP;
 
       if (newValue >= MIN_SCALE_VALUE) {
         valueInput.value = newValue + '%';
-        pictureElement.style.transform = `scale(${newValue / 100})`;
+        pictureElement.style.transform = 'scale(' + newValue / 100 + ')';
       }
     },
-    increaseScale: function(valueInput, pictureElement) {
-      var value = parseInt(valueInput.value);
+    increaseScale: function (valueInput, pictureElement) {
+      var value = parseInt(valueInput.value, 10);
       var newValue = value + SCALE_STEP;
 
       if (newValue <= MAX_SCALE_VALUE) {
         valueInput.value = newValue + '%';
-        pictureElement.style.transform = `scale(${newValue / 100})`;
+        pictureElement.style.transform = 'scale(' + newValue / 100 + ')';
       }
     }
   };

@@ -209,6 +209,7 @@
         return previewPictures[i].id;
       }
     }
+    return previewPictures;
   }
 
   function onImgUploadSubmitClick() {

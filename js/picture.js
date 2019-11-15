@@ -48,14 +48,14 @@
       var commentsLoader = document.querySelector('.social__comments-loader');
       commentsLoader.addEventListener('click', onCommentsLoaderClick);
       commentsLoader.classList.remove('hidden');
+    }
 
-      function onCommentsLoaderClick() {
-        socialComments.appendChild(createCommentsFragment(commentsPool));
+    function onCommentsLoaderClick() {
+      socialComments.appendChild(createCommentsFragment(commentsPool));
 
-        if (commentsPool.length === 0) {
-          commentsLoader.classList.add('hidden');
-          commentsLoader.removeEventListener('click', onCommentsLoaderClick);
-        }
+      if (commentsPool.length === 0) {
+        commentsLoader.classList.add('hidden');
+        commentsLoader.removeEventListener('click', onCommentsLoaderClick);
       }
     }
   }
