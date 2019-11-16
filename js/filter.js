@@ -92,9 +92,7 @@
   }
 
   function onDocumentKeydown(evt) {
-    var target = evt.target;
-
-    if (window.util.isEscEvent(evt) && target.className !== textHashtagsInput && target.className !== descriptionTextarea) {
+    if (window.util.isEscEvent(evt) && document.activeElement !== textHashtagsInput && document.activeElement !== descriptionTextarea) {
       closePictureEditor();
     }
   }
@@ -215,7 +213,7 @@
   function onImgUploadSubmitClick() {
     var customErrorMessage = window.validateHashtags(textHashtagsInput.value);
 
-    if (customErrorMessage !== null) {
+    if (customErrorMessage === '') {
       textHashtagsInput.setCustomValidity(customErrorMessage);
       textHashtagsInput.classList.add('hashtags-invalid');
     }

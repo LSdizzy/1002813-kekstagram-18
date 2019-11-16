@@ -78,7 +78,7 @@
     var commentAuthorImg = document.createElement('img');
     commentAuthorImg.classList.add('social__picture');
     commentAuthorImg.src = comment.avatar;
-    commentAuthorImg.alt = 'Аватар комментатора фотографии';
+    commentAuthorImg.alt = comment.name;
     commentAuthorImg.width = '35';
     commentAuthorImg.height = '35';
 
